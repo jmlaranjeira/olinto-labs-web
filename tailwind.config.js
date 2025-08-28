@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+import forms from '@tailwindcss/forms';
+import animate from 'tailwindcss-animate';
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -43,7 +44,5 @@ export default {
       }
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [forms, animate],
 }
