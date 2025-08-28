@@ -1,14 +1,12 @@
 <template>
   <section 
-    class="overflow-hidden relative bg-cover" 
+    class="overflow-hidden relative bg-gradient-to-br from-blue-50 to-indigo-100" 
     id="hero" 
     :style="{
-      backgroundImage: 'url(\"/Header-background.webp\")',
-      backgroundPosition: 'center 30%', 
       padding: isMobile ? '100px 12px 40px' : '120px 20px 60px'
     }"
   >
-    <div class="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-olinto-gradient opacity-20 blur-3xl rounded-full"></div>
+    <div class="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-gradient-to-br from-blue-400 to-purple-600 opacity-20 blur-3xl rounded-full"></div>
     
     <div class="container px-4 sm:px-6 lg:px-8" ref="containerRef">
       <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
@@ -22,16 +20,16 @@
           </div>
           
           <h1 
-            class="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight opacity-0 animate-fade-in text-foreground" 
+            class="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight opacity-0 animate-fade-in text-gray-900" 
             style="animation-delay: 0.3s"
           >
             Agentes de IA que<br class="hidden sm:inline" />
-            <span class="text-mask-image bg-tech-gradient">transforman empresas</span>
+            <span class="text-gradient">transforman empresas</span>
           </h1>
           
           <p 
             style="animation-delay: 0.5s" 
-            class="section-subtitle mt-3 sm:mt-6 mb-4 sm:mb-8 leading-relaxed opacity-0 animate-fade-in text-muted-foreground font-normal text-base sm:text-lg text-left"
+            class="section-subtitle mt-3 sm:mt-6 mb-4 sm:mb-8 leading-relaxed opacity-0 animate-fade-in text-gray-600 font-normal text-base sm:text-lg text-left"
           >
             En Olinto Labs desarrollamos agentes de IA especializados que automatizan procesos, 
             optimizan operaciones y potencian la productividad de tu negocio.
@@ -57,22 +55,24 @@
         </div>
         
         <div class="w-full lg:w-1/2 relative mt-6 lg:mt-0">
-          <div class="absolute inset-0 bg-dark-900 rounded-2xl sm:rounded-3xl -z-10 shadow-xl"></div>
-          <div class="relative transition-all duration-500 ease-out overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
-            <img 
-              ref="imageRef" 
-              src="/lovable-uploads/5663820f-6c97-4492-9210-9eaa1a8dc415.png" 
-              alt="Atlas Robot" 
-              class="w-full h-auto object-cover transition-transform duration-500 ease-out" 
-              style="transform-style: preserve-3d" 
-            />
-            <div class="absolute inset-0" style="background-image: url('/hero-image.jpg'); background-size: cover; background-position: center; mix-blend-mode: overlay; opacity: 0.5"></div>
+          <div class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-8">
+            <div class="text-center">
+              <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Tecnología de Vanguardia</h3>
+              <p class="text-gray-600">
+                Soluciones de IA avanzadas para transformar tu negocio
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     
-    <div class="hidden lg:block absolute bottom-0 left-1/4 w-64 h-64 bg-olinto-100/30 rounded-full blur-3xl -z-10 parallax" data-speed="0.05"></div>
+    <div class="hidden lg:block absolute bottom-0 left-1/4 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl -z-10 parallax" data-speed="0.05"></div>
   </section>
 </template>
 
@@ -80,31 +80,10 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const containerRef = ref<HTMLElement>()
-const imageRef = ref<HTMLImageElement>()
 const isMobile = ref(false)
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth < 768
-}
-
-const handleMouseMove = (e: MouseEvent) => {
-  if (!containerRef.value || !imageRef.value) return
-  
-  const {
-    left,
-    top,
-    width,
-    height
-  } = containerRef.value.getBoundingClientRect()
-  const x = (e.clientX - left) / width - 0.5
-  const y = (e.clientY - top) / height - 0.5
-
-  imageRef.value.style.transform = `perspective(1000px) rotateY(${x * 2.5}deg) rotateX(${-y * 2.5}deg) scale3d(1.02, 1.02, 1.02)`
-}
-
-const handleMouseLeave = () => {
-  if (!imageRef.value) return
-  imageRef.value.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)'
 }
 
 const handleScroll = () => {
@@ -124,11 +103,6 @@ onMounted(() => {
   checkMobile()
   window.addEventListener('resize', checkMobile)
   
-  if (!isMobile.value && containerRef.value) {
-    containerRef.value.addEventListener('mousemove', handleMouseMove)
-    containerRef.value.addEventListener('mouseleave', handleMouseLeave)
-  }
-  
   if (!isMobile.value) {
     window.addEventListener('scroll', handleScroll, { passive: true })
   }
@@ -136,12 +110,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', checkMobile)
-  
-  if (containerRef.value) {
-    containerRef.value.removeEventListener('mousemove', handleMouseMove)
-    containerRef.value.removeEventListener('mouseleave', handleMouseLeave)
-  }
-  
   window.removeEventListener('scroll', handleScroll)
 })
 </script>
@@ -155,7 +123,7 @@ onUnmounted(() => {
   @apply font-bold tracking-tight;
 }
 
-.text-mask-image {
+.text-gradient {
   @apply bg-gradient-to-r from-primary-600 via-blue-600 to-purple-600 bg-clip-text text-transparent;
 }
 
@@ -169,21 +137,5 @@ onUnmounted(() => {
 
 .parallax {
   transform: translateY(var(--parallax-y, 0));
-}
-
-.bg-olinto-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.bg-tech-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-}
-
-.bg-olinto-100 {
-  background-color: #f0f4ff;
-}
-
-.bg-dark-900 {
-  background-color: #111827;
 }
 </style>
