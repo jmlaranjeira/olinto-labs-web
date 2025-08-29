@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base layer tokens */
+@layer base {
+  :root {
+    --brand-primary: #05D5FF;
+    --brand-secondary: #FF2E88;
+    --brand-bg: #0B0F14;
+  }
+  html { scroll-behavior: smooth; }
+  /* Visible focus for accessibility */
+  *:focus-visible { outline: 2px dashed var(--brand-primary); outline-offset: 2px; }
+}
+
+/* Example reusable utilities via @apply used from SCSS */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-semibold transition shadow hover:shadow-lg active:scale-[0.98] focus-visible:outline-none;
+  }
+  .btn-primary {
+    @apply btn bg-[color:var(--brand-primary)] text-slate-900 hover:brightness-110;
+  }
+  .btn-secondary {
+    @apply btn bg-[color:var(--brand-secondary)] text-white hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent border border-white/15 hover:bg-white/10;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm dark:bg-white/[0.03];
+  }
+  .section {
+    @apply py-16 md:py-24;
+  }
+  .container-xl {
+    @apply mx-auto max-w-7xl px-4 md:px-6;
+  }
+  .badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-sm;
+  }
+}
