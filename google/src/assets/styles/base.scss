@@ -1,0 +1,29 @@
+@import './_variables.scss';
+
+body {
+  @apply bg-olinto-dark-bg text-olinto-neutral-100 font-sans; // Estilos por defecto
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  // Estos estilos se aplicarán cuando la clase 'dark' esté en el body
+  @apply bg-olinto-dark-bg text-olinto-neutral-100;
+}
+
+body.light {
+  @apply bg-olinto-neutral-100 text-olinto-neutral-900;
+}
+
+html {
+  scroll-behavior: smooth; // Scroll suave para anclas
+}
+
+// Estilos globales para enlaces y foco
+a {
+  @apply text-olinto-primary hover:text-olinto-secondary transition-colors duration-200;
+}
+
+:focus-visible {
+  outline: 2px solid $color-primary; // Foco visible para accesibilidad
+  outline-offset: 2px;
+}
